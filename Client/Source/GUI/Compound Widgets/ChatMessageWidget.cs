@@ -5,7 +5,7 @@ using UnityEngine;
 using Utils;
 using Verse;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Compound_Widgets
 {
     public class ChatMessageWidget : Displayable
     {

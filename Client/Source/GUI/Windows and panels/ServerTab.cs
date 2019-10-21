@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Chat;
-using PhinixClient.GUI;
+using PhinixClient.GUI.Basic_Widgets;
+using PhinixClient.GUI.Compound_Widgets;
+using PhinixClient.GUI.Containers;
 using RimWorld;
 using UnityEngine;
 using Utils;
 using Verse;
 using static PhinixClient.Client;
 
-namespace PhinixClient
+namespace PhinixClient.GUI.Windows_and_panels
 {
     public class ServerTab : MainTabWindow
     {

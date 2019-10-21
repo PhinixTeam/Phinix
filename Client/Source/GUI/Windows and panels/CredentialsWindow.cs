@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace PhinixClient
+namespace PhinixClient.GUI.Windows_and_panels
 {
     // TODO: Make this look pretty
     public class CredentialsWindow : Window

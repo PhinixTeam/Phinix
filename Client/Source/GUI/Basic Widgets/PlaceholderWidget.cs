@@ -1,8 +1,7 @@
-﻿using PhinixClient.GUI;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
-namespace PhinixClient
+namespace PhinixClient.GUI.Basic_Widgets
 {
     public class PlaceholderWidget : Displayable
     {

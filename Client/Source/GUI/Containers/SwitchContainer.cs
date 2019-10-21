@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Containers
 {
     /// <summary>
     /// A switching container that draws different contents depending on a condition.

@@ -1,6 +1,7 @@
+using PhinixClient.GUI.Basic_Widgets;
 using UnityEngine;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Containers
 {
     public class HorizontalPaddedContainer : Displayable
     {

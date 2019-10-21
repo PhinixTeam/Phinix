@@ -1,9 +1,12 @@
 ﻿using System;
+using PhinixClient.GUI.Basic_Widgets;
+using PhinixClient.GUI.Containers;
+using PhinixClient.GUI.Windows_and_panels;
 using UnityEngine;
 using Utils;
 using Verse;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Compound_Widgets
 {
     public class TradeRow : Displayable
     {

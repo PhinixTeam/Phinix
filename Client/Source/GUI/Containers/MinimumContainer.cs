@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using Verse;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Containers
 {
     public class MinimumContainer : Displayable
     {

@@ -4,7 +4,7 @@
 using UnityEngine;
 using Verse;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Basic_Widgets
 {
     public class TextWidget : Displayable
     {

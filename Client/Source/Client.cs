@@ -10,6 +10,7 @@ using HugsLib.Settings;
 using RimWorld;
 using Trading;
 using HugsLib.Utils;
+using PhinixClient.GUI.Windows_and_panels;
 using UserManagement;
 using Utils;
 using Verse;

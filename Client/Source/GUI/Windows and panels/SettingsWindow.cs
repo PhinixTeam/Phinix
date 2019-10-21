@@ -1,11 +1,11 @@
 ﻿using System.Text.RegularExpressions;
 using System.Threading;
-using PhinixClient.GUI;
 using PhinixClient.GUI.Basic_Widgets;
+using PhinixClient.GUI.Containers;
 using UnityEngine;
 using Verse;
 
-namespace PhinixClient
+namespace PhinixClient.GUI.Windows_and_panels
 {
     class SettingsWindow : Window
     {

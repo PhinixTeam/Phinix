@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
-using PhinixClient.GUI;
+using PhinixClient.GUI.Basic_Widgets;
+using PhinixClient.GUI.Containers;
 using UnityEngine;
 using Verse;
 
-namespace PhinixClient
+namespace PhinixClient.GUI.Compound_Widgets
 {
     public class ItemStackRow : Displayable
     {

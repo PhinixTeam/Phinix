@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using PhinixClient.GUI;
+using PhinixClient.GUI.Basic_Widgets;
+using PhinixClient.GUI.Compound_Widgets;
+using PhinixClient.GUI.Containers;
 using RimWorld;
 using Trading;
 using UnityEngine;
@@ -10,7 +12,7 @@ using Utils;
 using Verse;
 using static PhinixClient.Client;
 
-namespace PhinixClient
+namespace PhinixClient.GUI.Windows_and_panels
 {
     public class TradeWindow : Window
     {

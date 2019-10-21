@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Basic_Widgets
 {
     /// <summary>
     /// An open-ended adapter class used for drawing custom or complex widgets.

@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using Verse;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Containers
 {
     internal class ScrollContainer : Displayable
     {

@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Containers
 {
     internal struct TabEntry
     {

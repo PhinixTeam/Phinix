@@ -1,9 +1,9 @@
-using PhinixClient.GUI;
+using PhinixClient.GUI.Basic_Widgets;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace PhinixClient
+namespace PhinixClient.GUI.Windows_and_panels
 {
     public class ServerTabButtonWorker : MainButtonWorker_ToggleTab
     {

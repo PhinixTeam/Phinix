@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using Verse;
 
-namespace PhinixClient.GUI
+namespace PhinixClient.GUI.Basic_Widgets
 {
     internal class CheckboxLabeledWidget : Displayable
     {

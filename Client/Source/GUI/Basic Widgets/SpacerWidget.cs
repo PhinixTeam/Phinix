@@ -1,7 +1,6 @@
-using PhinixClient.GUI;
 using UnityEngine;
 
-namespace PhinixClient
+namespace PhinixClient.GUI.Basic_Widgets
 {
     /// <summary>
     /// An empty widget that takes up the configured amount of space.
