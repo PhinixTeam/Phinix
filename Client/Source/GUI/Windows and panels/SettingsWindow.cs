@@ -27,6 +27,7 @@ namespace PhinixClient
         private string serverAddress;
         private string serverPortString;
 
+        private Displayable contents;
 
         public SettingsWindow(string serverAddress, int serverPort) : base()
         {
@@ -39,6 +40,22 @@ namespace PhinixClient
             doCloseButton = false;
             doWindowBackground = true;
 
+            // Generate the window content and cache it
+            contents = generateContents();
+        }
+
+        public override void DoWindowContents(Rect inRect)
+        {
+            // Draw the container with 5f padding at the top to avoid clipping with the close button
+            contents.Draw(inRect.BottomPartPixels(inRect.height - 5f));
+        }
+
+        /// <summary>
+        /// Generates the window contents.
+        /// </summary>
+        /// <returns>Generated content as a <see cref="Displayable"/></returns>
+        private Displayable generateContents()
+        {
             // Create a flex container to hold our settings
             VerticalFlexContainer flexContainer = new VerticalFlexContainer(DEFAULT_SPACING);
 
@@ -64,8 +81,7 @@ namespace PhinixClient
                 height: ROW_HEIGHT * flexContainer.Contents.Count + DEFAULT_SPACING * (flexContainer.Contents.Count - 1)
             );
 
-            // Draw the container with 5f padding at the top to avoid clipping with the close button
-            container.Draw(inRect.BottomPartPixels(inRect.height - 5f));
+            return container;
         }
 
         /// <summary>
