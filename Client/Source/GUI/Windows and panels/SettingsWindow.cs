@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Threading;
 using PhinixClient.GUI;
+using PhinixClient.GUI.Basic_Widgets;
 using UnityEngine;
 using Verse;
 
@@ -70,10 +71,14 @@ namespace PhinixClient
             );
 
             // Display name
-            if (Client.Instance.Online)
-            {
-                flexContainer.Add(GenerateEditableDisplayName());
-            };
+            // Packed inside a switch container that depends on the connected status
+            flexContainer.Add(
+                new SwitchContainer(
+                    childIfTrue: GenerateEditableDisplayName(),
+                    childIfFalse: new BlankWidget(),
+                    condition: () => Client.Instance.Online
+                )
+            );
 
             // Constrain the flex container within another container to avoid widgets becoming excessively large
             Container container = new Container(
