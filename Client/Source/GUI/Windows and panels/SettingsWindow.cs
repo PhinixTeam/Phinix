@@ -60,14 +60,14 @@ namespace PhinixClient
             VerticalFlexContainer flexContainer = new VerticalFlexContainer(DEFAULT_SPACING);
 
             // Server details (address and [dis]connect button) container
-            if (Client.Instance.Connected)
-            {
-                flexContainer.Add(GenerateConnectedServerDetails());
-            }
-            else
-            {
-                flexContainer.Add(GenerateDisconnectedServerDetails());
-            }
+            // Packed inside a switch container that depends on the connected status
+            flexContainer.Add(
+                new SwitchContainer(
+                    childIfTrue: GenerateConnectedServerDetails(),
+                    childIfFalse: GenerateDisconnectedServerDetails(),
+                    condition: () => Client.Instance.Connected
+                )
+            );
 
             // Display name
             if (Client.Instance.Online)
