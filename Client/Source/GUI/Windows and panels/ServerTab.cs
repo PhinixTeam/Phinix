@@ -115,7 +115,7 @@ namespace PhinixClient
                 new Container(
                     new ButtonWidget(
                         label: "Phinix_chat_settingsButton".Translate(),
-                        clickAction: () => Find.WindowStack.Add(new SettingsWindow())
+                        clickAction: () => Find.WindowStack.Add(new SettingsWindow(Instance.ServerAddress, Instance.ServerPort))
                     ),
                     height: SETTINGS_BUTTON_HEIGHT
                 )

@@ -24,11 +24,17 @@ namespace PhinixClient
 
         public override Vector2 InitialSize => new Vector2(600f, 120f);
 
-        private static string serverAddress = Client.Instance.ServerAddress;
-        private static string serverPortString = Client.Instance.ServerPort.ToString();
+        private string serverAddress;
+        private string serverPortString;
 
-        public override void DoWindowContents(Rect inRect)
+
+        public SettingsWindow(string serverAddress, int serverPort) : base()
         {
+            // Set instance variables
+            this.serverAddress = serverAddress;
+            this.serverPortString = serverPort.ToString();
+
+            // Override window properties
             doCloseX = true;
             doCloseButton = false;
             doWindowBackground = true;
