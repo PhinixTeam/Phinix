@@ -52,6 +52,14 @@ namespace PhinixClient.GUI.Windows_and_panels
         
         private static Vector2 activeTradesScroll = new Vector2(0, 0);
 
+        private static Displayable contents;
+
+        public ServerTab()
+        {
+            // Generate and cache the window content
+            contents = generateContents();
+        }
+
         ///<inheritdoc/>
         /// <summary>
         /// Overrides the default accept key behaviour and instead sends a message.
@@ -75,6 +83,12 @@ namespace PhinixClient.GUI.Windows_and_panels
         {
             base.DoWindowContents(inRect);
             
+            // Draw the window content
+            contents.Draw(inRect);
+        }
+
+        private Displayable generateContents()
+        {
             // Create a tab container to hold the chat and trade list
             TabsContainer tabContainer = new TabsContainer(newTabIndex => currentTabIndex = newTabIndex, currentTabIndex);
             
@@ -99,9 +113,8 @@ namespace PhinixClient.GUI.Windows_and_panels
             
             // Add the active trades tab
             tabContainer.AddTab("Phinix_tabs_trades".Translate(), GenerateTradeRows());
-            
-            // Draw the tabs
-            tabContainer.Draw(inRect);
+
+            return tabContainer;
         }
 
         /// <summary>
@@ -135,14 +148,13 @@ namespace PhinixClient.GUI.Windows_and_panels
             );
 
             // User list
-            if (Instance.Online)
-            {
-                column.Add(GenerateUserList());
-            }
-            else
-            {
-                column.Add(new PlaceholderWidget());
-            }
+            column.Add(
+                new SwitchContainer(
+                    childIfTrue: GenerateUserList(),
+                    childIfFalse: new PlaceholderWidget(),
+                    condition: () => Instance.Online
+                )
+            );
 
             // Return the generated column
             return column;
@@ -157,20 +169,15 @@ namespace PhinixClient.GUI.Windows_and_panels
             VerticalFlexContainer column = new VerticalFlexContainer(DEFAULT_SPACING);
             
             // Chat message area
-            if (Instance.Online)
-            {
-                column.Add(
-                    GenerateMessages()
-                );
-            }
-            else
-            {
-                column.Add(
-                    new PlaceholderWidget(
+            column.Add(
+                new SwitchContainer(
+                    childIfTrue: GenerateMessages(),
+                    childIfFalse: new PlaceholderWidget(
                         text: "Phinix_chat_pleaseLogInPlaceholder".Translate()
-                    )
-                );
-            }
+                    ), 
+                    condition: () => Instance.Online
+                )
+            );
 
             // Message entry field
             TextFieldWidget messageField = new TextFieldWidget(
