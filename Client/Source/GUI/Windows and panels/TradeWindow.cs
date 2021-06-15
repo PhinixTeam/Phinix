@@ -6,6 +6,7 @@ using PhinixClient.GUI;
 using RimWorld;
 using Trading;
 using UnityEngine;
+using UserManagement;
 using Utils;
 using Verse;
 using static PhinixClient.Client;
@@ -96,6 +97,16 @@ namespace PhinixClient
         private object theirOfferCacheLock = new object();
 
         /// <summary>
+        /// Cached copy of the other party's display name.
+        /// </summary>
+        private string otherPartyDisplayName;
+        /// <summary>
+        /// Flag signalling whether the other party's display name has changed and <see cref="otherPartyDisplayName"/>
+        /// should be updated.
+        /// </summary>
+        private bool otherPartyDisplayNameChanged = false;
+
+        /// <summary>
         /// Creates a new <see cref="TradeWindow"/> for the given trade ID.
         /// </summary>
         /// <param name="tradeId">Trade ID</param>
@@ -117,10 +128,12 @@ namespace PhinixClient
             Instance.OnTradeCancelled += OnTradeCancelled;
             Instance.OnTradeUpdateSuccess += OnTradeUpdated;
             Instance.OnTradeUpdateFailure += OnTradeUpdated;
+            Instance.OnUserDisplayNameChanged += OnUserDisplayNameChanged;
         }
 
         public override void PreOpen()
         {
+            // TODO: Pre-generate layout
             base.PreOpen();
 
             // Select all maps that are player homes
@@ -157,16 +170,22 @@ namespace PhinixClient
             Instance.OnTradeCancelled -= OnTradeCancelled;
             Instance.OnTradeUpdateSuccess -= OnTradeUpdated;
             Instance.OnTradeUpdateFailure -= OnTradeUpdated;
+            Instance.OnUserDisplayNameChanged -= OnUserDisplayNameChanged;
         }
 
         public override void DoWindowContents(Rect inRect)
         {
-            // Get the other party's display name
-            string displayName = GetOtherPartyDisplayName();
+            // Update the other party's display name if necessary
+            if (otherPartyDisplayNameChanged)
+            {
+                otherPartyDisplayName = GetOtherPartyDisplayName();
 
+                otherPartyDisplayNameChanged = false;
+            }
+            
             // Title
             new TextWidget(
-                text: "Phinix_trade_tradeTitle".Translate(TextHelper.StripRichText(displayName)),
+                text: "Phinix_trade_tradeTitle".Translate(TextHelper.StripRichText(otherPartyDisplayName)),
                 font: GameFont.Medium,
                 anchor: TextAnchor.MiddleCenter
             ).Draw(inRect.TopPartPixels(TITLE_HEIGHT));
@@ -241,6 +260,11 @@ namespace PhinixClient
                     }
                 }
             }
+        }
+        
+        private void OnUserDisplayNameChanged(object sender, UserDisplayNameChangedEventArgs e)
+        {
+            otherPartyDisplayNameChanged = true;
         }
 
         /// <summary>
