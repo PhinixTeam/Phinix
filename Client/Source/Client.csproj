@@ -85,6 +85,7 @@
     <Compile Include="GUI\Compound Widgets\ChatMessageList.cs" />
     <Compile Include="GUI\Compound Widgets\ChatMessageWidget.cs" />
     <Compile Include="GUI\Compound Widgets\DynamicTextWidget.cs" />
+    <Compile Include="GUI\Compound Widgets\ItemStackList.cs" />
     <Compile Include="GUI\Compound Widgets\ItemStackRow.cs" />
     <Compile Include="GUI\Compound Widgets\TradeList.cs" />
     <Compile Include="GUI\Compound Widgets\TradeRow.cs" />

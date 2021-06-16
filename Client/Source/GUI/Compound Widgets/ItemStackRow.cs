@@ -33,7 +33,7 @@ namespace PhinixClient
         /// <summary>
         /// Whether to draw an alternate background colour.
         /// </summary>
-        private bool alternateBackground;
+        public bool DrawAlternateBackground;
 
         /// <summary>
         /// Callback invoked when the number of selected items has changed.
@@ -51,7 +51,7 @@ namespace PhinixClient
         {
             this.itemStack = itemStack;
             this.interactive = interactive;
-            this.alternateBackground = alternateBackground;
+            this.DrawAlternateBackground = alternateBackground;
             this.onSelectedChanged = onSelectedChanged;
         }
 
@@ -59,7 +59,7 @@ namespace PhinixClient
         public override void Draw(Rect container)
         {
             // Background
-            if (alternateBackground) Widgets.DrawHighlight(container);
+            if (DrawAlternateBackground) Widgets.DrawHighlight(container);
 
             // Create a row to hold everything
             HorizontalFlexContainer row = new HorizontalFlexContainer(DEFAULT_SPACING);
