@@ -16,11 +16,11 @@ namespace PhinixClient.GUI.Compound_Widgets
         /// <summary>
         /// Collection of <see cref="StackedThings"/> to be shown in the list.
         /// </summary>
-        public readonly List<StackedThings> itemStacks;
+        public readonly List<StackedThings> ItemStacks;
         
         /// <summary>
         /// Collection of <see cref="ItemStackRow"/>s (wrapped in <see cref="MinimumContainer"/>s) derived from
-        /// <see cref="itemStacks"/>.
+        /// <see cref="ItemStacks"/>.
         /// </summary>
         private readonly List<MinimumContainer> itemStackRows;
         /// <summary>
@@ -58,7 +58,7 @@ namespace PhinixClient.GUI.Compound_Widgets
 
         public ItemStackList(List<StackedThings> itemStacks, bool interactive = false, float minimumHeight = 30f)
         {
-            this.itemStacks = itemStacks;
+            this.ItemStacks = itemStacks;
             this.interactive = interactive;
             this.minimumHeight = minimumHeight;
             
@@ -113,7 +113,15 @@ namespace PhinixClient.GUI.Compound_Widgets
         }
 
         /// <summary>
-        /// Clears and regenerates <see cref="itemStackRows"/> with the contents of <see cref="itemStacks"/>.
+        /// Clears and regenerates the rows based on the contents of <see cref="ItemStacks"/>.
+        /// </summary>
+        public void RegenerateRows()
+        {
+            generateItemStackRows();
+        }
+
+        /// <summary>
+        /// Clears and regenerates <see cref="itemStackRows"/> with the contents of <see cref="ItemStacks"/>.
         /// </summary>
         private void generateItemStackRows()
         {
@@ -121,11 +129,11 @@ namespace PhinixClient.GUI.Compound_Widgets
             {
                 itemStackRows.Clear();
                 
-                for (int i = 0; i < itemStacks.Count; i++)
+                for (int i = 0; i < ItemStacks.Count; i++)
                 {
                     // Create an ItemStackRow from this item
                     ItemStackRow row = new ItemStackRow(
-                        itemStack: itemStacks[i],
+                        itemStack: ItemStacks[i],
                         interactive: interactive,
                         alternateBackground: i % 2 != 0
                     );

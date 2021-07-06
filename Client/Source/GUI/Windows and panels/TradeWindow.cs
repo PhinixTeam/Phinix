@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using PhinixClient.GUI;
+using PhinixClient.GUI.Compound_Widgets;
 using RimWorld;
 using Trading;
 using UnityEngine;
@@ -571,9 +572,8 @@ namespace PhinixClient
             lock (ourOfferCacheLock)
             {
                 column.Add(
-                    GenerateItemList(
-                        itemStacks: ourOfferCache,
-                        scrollUpdate: newScrollPos => ourOfferScrollPos = newScrollPos
+                    new VerticalScrollContainer(
+                        new ItemStackList(ourOfferCache)
                     )
                 );
             }
@@ -606,9 +606,8 @@ namespace PhinixClient
             lock (theirOfferCacheLock)
             {
                 column.Add(
-                    GenerateItemList(
-                        itemStacks: theirOfferCache,
-                        scrollUpdate: newScrollPos => theirOfferScrollPos = newScrollPos
+                    new VerticalScrollContainer(
+                        new ItemStackList(theirOfferCache)
                     )
                 );
             }
@@ -718,52 +717,13 @@ namespace PhinixClient
 
             // Stockpile items list
             column.Add(
-                GenerateItemList(filteredItemStacks, newScrollPos => stockpileItemsScrollPos = newScrollPos, true)
+                new VerticalScrollContainer(
+                    new ItemStackList(filteredItemStacks.ToList(), true)
+                )
             );
 
             // Return the generated flex container
             return column;
-        }
-
-        /// <summary>
-        /// Generates a <see cref="VerticalScrollContainer"/> containing an item list within the given container.
-        /// </summary>
-        /// <param name="itemStacks">Item stacks to draw in the list</param>
-        /// <param name="scrollPos">List scroll position</param>
-        /// <param name="scrollUpdate">Action invoked with the scroll position of the item list when it is drawn</param>
-        /// <param name="interactive">Whether the item counts should be modifiable by the user</param>
-        private VerticalScrollContainer GenerateItemList(IEnumerable<StackedThings> itemStacks, Action<Vector2> scrollUpdate, bool interactive = false)
-        {
-            // Create a new flex container as our 'column' to hold each element
-            VerticalFlexContainer column = new VerticalFlexContainer(0f);
-
-            // Set up a list to hold our item stack rows
-            int iterations = 0;
-            foreach (StackedThings itemStack in itemStacks)
-            {
-                // Create an ItemStackRow from this item
-                ItemStackRow row = new ItemStackRow(
-                    itemStack: itemStack,
-                    interactive: interactive,
-                    alternateBackground: iterations++ % 2 != 0, // Be careful of the positioning of ++ here, this should increment /after/ the operation
-                    onSelectedChanged: _ =>                     // We don't need the value, so we can just assign it to _
-                    {
-                        //Client.Instance.UpdateTradeItems(tradeId, this.itemStacks.SelectMany(stack => stack.GetSelectedThingsAsProto()));
-                    }
-                );
-
-                // Contain the row within a minimum-height container
-                MinimumContainer container = new MinimumContainer(
-                    row,
-                    minHeight: OFFER_WINDOW_ROW_HEIGHT
-                );
-
-                // Add it to the row list
-                column.Add(container);
-            }
-
-            // Return the flex container wrapped in a scroll container
-            return new VerticalScrollContainer(column, scrollUpdate);
         }
     }
 }
